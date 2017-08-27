@@ -4,6 +4,8 @@ import UserInfoComponent from './UserInfoComponent';
 import InvoiceDateComponent from './InvoiceDateComponent';
 import InvoiceLineItemsComponent from './InvoiceLineItemsComponent';
 
+import { convertDateToRequiredFormat } from '../util/date_utils';
+
 import '../style/AddInvoiceContainer.css';
 
 /**
@@ -31,7 +33,7 @@ class AddInvoiceContainer extends Component {
                 userName: 'Intuit User',
                 userEmail: 'intuit_user@intuit.com'
             },
-            dueDate: '',
+            dueDate: convertDateToRequiredFormat(new Date()),
             lineItems: [
                 {
                     id: this.nextLineItemID,
@@ -46,6 +48,7 @@ class AddInvoiceContainer extends Component {
         this.handleNewLineItemAddition = this.handleNewLineItemAddition.bind(this);
         this.handleUserNameChange = this.handleUserNameChange.bind(this);
         this.handleUserEmailChange = this.handleUserEmailChange.bind(this);
+        this.handleDueDateChange = this.handleDueDateChange.bind(this);
     }
 
     /**
@@ -135,6 +138,16 @@ class AddInvoiceContainer extends Component {
     }
 
     /**
+     * Handler method to handle due date changes.
+     * @see util/date_utils.convertDateToRequiredFormat()
+     */
+    handleDueDateChange(event) {
+        this.setState({
+            dueDate: convertDateToRequiredFormat(new Date(event.target.value))
+        });
+    }
+
+    /**
      * Sub-render method to render UserInfoComponent
      * @see handleUserNameChange()
      * @see handleUserEmailChange()
@@ -145,6 +158,19 @@ class AddInvoiceContainer extends Component {
                 userInfo={this.state.userInfo}
                 onUserNameChange={this.handleUserNameChange}
                 onUserEmailChange={this.handleUserEmailChange}
+            />
+        );
+    }
+
+    /**
+     * Sub-render method to render Due Date for Invoice.
+     * @see handleDueDateChange()
+     */
+    renderInvoiceDateComponent() {
+        return (
+            <InvoiceDateComponent
+                dueDate={this.state.dueDate}
+                onDueDateChange={this.handleDueDateChange}
             />
         );
     }
@@ -177,7 +203,7 @@ class AddInvoiceContainer extends Component {
             <div className='invoice-container'>
                 <p>AddInvoiceContainer component at uber level.</p>
                 {this.renderUserInfoComponent()}
-                <InvoiceDateComponent />
+                {this.renderInvoiceDateComponent()}
                 {this.renderInvoiceLineItems()}
                 <input type='button' value='Send Invoice' name='sendInvoice' />
             </div>
