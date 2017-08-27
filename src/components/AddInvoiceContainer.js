@@ -39,7 +39,7 @@ class AddInvoiceContainer extends Component {
                 {
                     id: this.nextLineItemID,
                     invoiceDescription: 'Default description',
-                    invoiceAmount: '100'
+                    invoiceAmount: '0'
                 }
             ],
             invoiceSent: true
@@ -107,7 +107,7 @@ class AddInvoiceContainer extends Component {
         const newLineItem = {
             id: this.nextLineItemID,
             invoiceDescription: 'Default description',
-            invoiceAmount: '100'
+            invoiceAmount: '0'
         };
         currentLineItems.push(newLineItem);
         this.setState({
@@ -187,7 +187,7 @@ class AddInvoiceContainer extends Component {
                 {
                     id: this.nextLineItemID,
                     invoiceDescription: '',
-                    invoiceAmount: ''
+                    invoiceAmount: '0'
                 }
             ],
             invoiceSent: !this.state.invoiceSent
@@ -264,7 +264,7 @@ class AddInvoiceContainer extends Component {
                     </div>
                     :
                     <div>
-                        <h1>Invoice has been added to DB</h1>
+                        <h1>Invoice has been added to storage.</h1>
                         <div>
                             <button
                                 name='addNewInvoice'
