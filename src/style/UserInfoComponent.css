@@ -2,13 +2,12 @@
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    width: 300px;
+    width: 400px;
     height: 34px;
     color: #B8B8B8;
     border-radius: 2px;
     border: 1px solid #babec5;
     padding: 0 6px 0 0;
-    margin-top: 20px;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -16,19 +15,19 @@
     background-color: #ffffff;
     text-decoration-color: #000000;
     align-self: auto;
+    margin-bottom: 10px;
 }
 
 .user-email {
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    width: 300px;
+    width: 400px;
     height: 34px;
     color: #B8B8B8;
     border-radius: 2px;
     border: 1px solid #babec5;
     padding: 0 6px 0 0;
-    margin-top: 20px;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -36,4 +35,24 @@
     background-color: #ffffff;
     text-decoration-color: #000000;
     align-self: auto;
+    margin-bottom: 10px;
+}
+
+.user-info-block {
+    width: 400px;
+    border: 1px, solid;
+}
+
+.user-name-label {
+    display: block;
+    float: left;
+    padding-bottom: 6px;
+    font-weight: bold;
+}
+
+.user-email-label {
+    display: block;
+    float: left;
+    padding-bottom: 6px;
+    font-weight: bold;
 }

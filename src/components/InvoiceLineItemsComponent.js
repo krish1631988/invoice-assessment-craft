@@ -79,23 +79,17 @@ class InvoiceLineItemsComponent extends Component {
      * @see handleLineItemAddition
      */
     render() {
-        let lineItemsTotalAmt = 0;
-        const lineItems = this.props.lineItems;
-        lineItems.forEach(function(lineItem) {
-            lineItemsTotalAmt = lineItemsTotalAmt + parseFloat(lineItem.invoiceAmount);
-        });
         return (
             <div>
                 {this.createLineItems(this.props.lineItems)}
-                <button
-                    name='addLineItem'
-                    className='add-line-item-btn'
-                    onClick={this.handleLineItemAddition}
-                >
-                    {'+'}
-                </button>
-                <div>
-                    <span>{`Total : $`}{lineItemsTotalAmt}</span>
+                <div className='line-item-add-button-div'>
+                    <button
+                        name='addLineItem'
+                        className='add-line-item-btn'
+                        onClick={this.handleLineItemAddition}
+                    >
+                        {'+'}
+                    </button>
                 </div>
             </div>
         );

@@ -42,9 +42,11 @@ class InvoiceDateComponent extends Component {
      */
     render() {
         return (
-            <div>
-                {`Due Date:    `}
-                {this.renderDueDateField()}
+            <div className='invoice-due-date-block'>
+                <label className='due-date-label'>{`Due Date`}</label>
+                <div>
+                    {this.renderDueDateField()}
+                </div>
             </div>
         );
     }

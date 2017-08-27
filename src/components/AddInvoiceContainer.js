@@ -247,6 +247,11 @@ class AddInvoiceContainer extends Component {
      */
     render() {
         const invoiceSent = this.state.invoiceSent;
+        let lineItemsTotalAmt = 0;
+        const lineItems = this.state.lineItems;
+        lineItems.forEach(function(lineItem) {
+            lineItemsTotalAmt = lineItemsTotalAmt + parseFloat(lineItem.invoiceAmount);
+        });
         return (
             <div>
                 {
@@ -255,18 +260,25 @@ class AddInvoiceContainer extends Component {
                         {this.renderUserInfoComponent()}
                         {this.renderInvoiceDateComponent()}
                         {this.renderInvoiceLineItems()}
-                        <button
-                            name='sendInvoice'
-                            onClick={this.handleSendingInvoice}
-                        >
-                            {'Send Invoice'}
-                        </button>
+                        <div className='total-block'>
+                            <span className='total-span'>{`TOTAL     $`}{lineItemsTotalAmt}</span>
+                        </div>
+                        <div className='send-invoice-btn-div'>
+                            <button
+                                className='send-invoice-btn'
+                                name='sendInvoice'
+                                onClick={this.handleSendingInvoice}
+                            >
+                                {'Send Invoice'}
+                            </button>
+                        </div>
                     </div>
                     :
-                    <div>
-                        <h1>Invoice has been added to storage.</h1>
-                        <div>
+                    <div className='invoice-container'>
+                        <h1>Invoice has been stored !!!</h1>
+                        <div className='another-invoice-btn-div'>
                             <button
+                                className='another-invoice-btn'
                                 name='addNewInvoice'
                                 onClick={this.handleReturningToAddInvoice}
                             >

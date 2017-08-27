@@ -74,10 +74,19 @@ class LineItemComponent extends Component {
     render() {
         return (
             <div className='line-item'>
-                {`Description:    `}
-                {this.renderDescriptionField()}
-                {`Amount:    `}
-                {this.renderAmountField()}
+                <table>
+                    {
+                        this.props.id === 0 &&
+                        <tr>
+                            <th><label className='description-label'>{`Description`}</label></th>
+                            <th><label className='amount-label'>{`Amount`}</label></th>
+                        </tr>
+                    }
+                    <tr>
+                        <td>{this.renderDescriptionField()}</td>
+                        <td>{this.renderAmountField()}</td>
+                    </tr>
+                </table>
             </div>
         );
     }

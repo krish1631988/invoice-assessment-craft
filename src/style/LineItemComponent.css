@@ -1,21 +1,18 @@
 .line-item {
-    align-items: auto;
-    align-self: auto;
-    align-content: auto;
+    width: 600px;
+    border: 1px, solid;
 }
 
 .description-field {
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    width: 100px;
+    width: 400px;
     height: 34px;
     color: #B8B8B8;
     border-radius: 2px;
     border: 1px solid #babec5;
     padding: 0 6px 0 0;
-    margin-top: 20px;
-    margin-right: 10px;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -23,20 +20,19 @@
     background-color: #ffffff;
     text-decoration-color: #000000;
     align-self: auto;
+    margin-bottom: 10px;
 }
 
 .amount-field {
     display: inline-block;
     box-sizing: border-box;
     position: relative;
-    width: 100px;
+    width: 200px;
     height: 34px;
     color: #B8B8B8;
     border-radius: 2px;
     border: 1px solid #babec5;
     padding: 0 6px 0 0;
-    margin-top: 20px;
-    margin-left: 10px;
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -44,4 +40,17 @@
     background-color: #ffffff;
     text-decoration-color: #000000;
     align-self: auto;
+    margin-bottom: 10px;
+}
+
+.description-label {
+    display: block;
+    float: left;
+    padding-bottom: 6px;
+}
+
+.amount-label {
+    display: block;
+    float: right;
+    padding-bottom: 6px;
 }

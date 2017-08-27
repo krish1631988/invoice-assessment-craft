@@ -69,13 +69,13 @@ class UserInfoComponent extends Component {
      */
     render() {
         return (
-            <div>
+            <div className='user-info-block'>
+                <label className='user-name-label'>{`Name`}</label>
                 <div>
-                    {`Name:    `}
                     {this.renderUserNameField()}
                 </div>
+                <label className='user-email-label'>{`Email`}</label>
                 <div>
-                    {`Email:    `}
                     {this.renderUserEmailField()}
                 </div>
             </div>
