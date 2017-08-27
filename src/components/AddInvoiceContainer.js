@@ -5,6 +5,7 @@ import InvoiceDateComponent from './InvoiceDateComponent';
 import InvoiceLineItemsComponent from './InvoiceLineItemsComponent';
 
 import { convertDateToRequiredFormat } from '../util/date_utils';
+import base_utils from '../util/base_utils';
 
 import '../style/AddInvoiceContainer.css';
 
@@ -30,8 +31,8 @@ class AddInvoiceContainer extends Component {
         this.nextLineItemID = 0;
         this.state = {
             userInfo: {
-                userName: 'Intuit User',
-                userEmail: 'intuit_user@intuit.com'
+                userName: '',
+                userEmail: ''
             },
             dueDate: convertDateToRequiredFormat(new Date()),
             lineItems: [
@@ -40,7 +41,8 @@ class AddInvoiceContainer extends Component {
                     invoiceDescription: 'Default description',
                     invoiceAmount: '100'
                 }
-            ]
+            ],
+            invoiceSent: true
         };
 
         this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
@@ -49,6 +51,8 @@ class AddInvoiceContainer extends Component {
         this.handleUserNameChange = this.handleUserNameChange.bind(this);
         this.handleUserEmailChange = this.handleUserEmailChange.bind(this);
         this.handleDueDateChange = this.handleDueDateChange.bind(this);
+        this.handleSendingInvoice = this.handleSendingInvoice.bind(this);
+        this.handleReturningToAddInvoice = this.handleReturningToAddInvoice.bind(this);
     }
 
     /**
@@ -148,6 +152,49 @@ class AddInvoiceContainer extends Component {
     }
 
     /**
+     * Handler method to send to invoice when clicked on Send Invoice button.
+     */
+    handleSendingInvoice() {
+        const invoiceID = base_utils.generateId();
+        const invoiceUserInfo = this.state.userInfo;
+        const invoiceDueDate = this.state.dueDate;
+        const invoiceLineItems = this.state.lineItems;
+        let invoiceToBeStored;
+        invoiceToBeStored = {
+            userInfo: invoiceUserInfo,
+            dueDate: invoiceDueDate,
+            lineItems: invoiceLineItems
+        }
+        localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+        console.log('Invoice is being sent');
+        this.setState({
+            invoiceSent: !this.state.invoiceSent
+        });
+    }
+
+    /**
+     * Handler method to return to adding a new invoice.
+     */
+    handleReturningToAddInvoice() {
+        this.nextLineItemID = 0;
+        this.setState({
+            userInfo: {
+                userName: '',
+                userEmail: ''
+            },
+            dueDate: convertDateToRequiredFormat(new Date()),
+            lineItems: [
+                {
+                    id: this.nextLineItemID,
+                    invoiceDescription: '',
+                    invoiceAmount: ''
+                }
+            ],
+            invoiceSent: !this.state.invoiceSent
+        });
+    }
+
+    /**
      * Sub-render method to render UserInfoComponent
      * @see handleUserNameChange()
      * @see handleUserEmailChange()
@@ -199,13 +246,35 @@ class AddInvoiceContainer extends Component {
      * and InvoiceLineItemsComponent.
      */
     render() {
+        const invoiceSent = this.state.invoiceSent;
         return (
-            <div className='invoice-container'>
-                <p>AddInvoiceContainer component at uber level.</p>
-                {this.renderUserInfoComponent()}
-                {this.renderInvoiceDateComponent()}
-                {this.renderInvoiceLineItems()}
-                <input type='button' value='Send Invoice' name='sendInvoice' />
+            <div>
+                {
+                    invoiceSent ?
+                    <div className='invoice-container'>
+                        {this.renderUserInfoComponent()}
+                        {this.renderInvoiceDateComponent()}
+                        {this.renderInvoiceLineItems()}
+                        <button
+                            name='sendInvoice'
+                            onClick={this.handleSendingInvoice}
+                        >
+                            {'Send Invoice'}
+                        </button>
+                    </div>
+                    :
+                    <div>
+                        <h1>Invoice has been added to DB</h1>
+                        <div>
+                            <button
+                                name='addNewInvoice'
+                                onClick={this.handleReturningToAddInvoice}
+                            >
+                                {'Add another Invoice'}
+                            </button>
+                        </div>
+                    </div>
+                }
             </div>
         );
     }
