@@ -2,49 +2,56 @@ import React, {Component} from 'react';
 
 import LineItemComponent from './LineItemComponent';
 
+/**
+ * React component to hold Invoice line items. Component would be responsible
+ * for adding LineItems and handling related updates. We would also display
+ * a read only total.
+ */
 class InvoiceLineItemsComponent extends Component {
+
     constructor(props) {
         super(props);
-        this.nextLineItemID = 0;
-        this.state = {
-            lineItems: [
-                {
-                    id: this.nextLineItemID,
-                    invoiceDescription: 'Test description',
-                    invoiceAmount: '100'
-                }
-            ]
-        };
 
-        this.handleLineItemAddition = this.handleLineItemAddition.bind(this);
         this.handleDescriptionTextChange = this.handleDescriptionTextChange.bind(this);
         this.handleAmountChange = this.handleAmountChange.bind(this);
+        this.handleLineItemAddition = this.handleLineItemAddition.bind(this);
     }
 
+    /**
+     * Handler method for description text change for a line item. We simply,
+     * cascase the event to parent AddInvoiceContainer component.
+     * @param event Event object fired by Description field of the line item.
+     */
     handleDescriptionTextChange(event) {
-        let currentLineItems = this.state.lineItems;
-        currentLineItems.forEach(function(lineItem) {
-            if (parseInt(event.target.id) === lineItem.id) {
-                lineItem.invoiceDescription = event.target.value;
-            }
-        });
-        this.setState({
-            lineItems: currentLineItems
-        });
+        this.props.onLineItemDescriptionChange(event);
     }
 
+    /**
+     * Handler method for amount change for a line item. We simply,
+     * cascase the event to parent AddInvoiceContainer component.
+     * @param event Event object fired by Amount field of the line item.
+     */
     handleAmountChange(event) {
-        let currentLineItems = this.state.lineItems;
-        currentLineItems.forEach(function(lineItem) {
-            if (parseInt(event.target.id) === lineItem.id) {
-                lineItem.invoiceAmount = event.target.value;
-            }
-        });
-        this.setState({
-            lineItems: currentLineItems
-        });
+        this.props.onLineItemAmountChange(event);
     }
 
+    /**
+     * Handler method for adding a new line item. We would just cascade the
+     * event call up to parent container component.
+     */
+    handleLineItemAddition() {
+        this.props.onNewLineItemAddition();
+    }
+
+    /**
+     * Utility method to help add line items when user clicks on '+' button.
+     *
+     * Get lineItems passes in as props and map through the array to render
+     * LineItemComponent based on every object entry in array.
+     * @param lineItems Array of lineItem objects.
+     * @see handleDescriptionTextChange()
+     * @see handleAmountChange
+     */
     createLineItems(lineItems) {
         let lLineItems;
         const self = this;
@@ -64,24 +71,15 @@ class InvoiceLineItemsComponent extends Component {
         return <div>{lLineItems}</div>;
     }
 
-    handleLineItemAddition() {
-        let currentLineItems = this.state.lineItems;
-        this.nextLineItemID++;
-        const newLineItem = {
-            id: this.nextLineItemID,
-            invoiceDescription: 'Default description',
-            invoiceAmount: '100'
-        };
-        currentLineItems.push(newLineItem);
-        this.setState({
-            lineItems: currentLineItems
-        });
-    }
-
+    /**
+     * Render method to render lineItem(s) and a '+' button to add more lineItems.
+     * At initial render, one lineItem would always be present.
+     * @see handleLineItemAddition
+     */
     render() {
         return (
             <div>
-                {this.createLineItems(this.state.lineItems)}
+                {this.createLineItems(this.props.lineItems)}
                 <button name='addLineItem' onClick={this.handleLineItemAddition}>{'+'}</button>
             </div>
         );
