@@ -54,3 +54,25 @@
     float: right;
     padding-bottom: 6px;
 }
+
+@media screen and (max-width:420px){
+    .line-item {
+        width: 100%;
+    }
+
+    .description-field {
+        width: 300px;
+        border-bottom-width: 1px;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+    }
+
+    .amount-field {
+        width: 65px;
+        border-bottom-width: 1px;
+        border-top-width: 0px;
+        border-left-width: 0px;
+        border-right-width: 0px;
+    }
+}
