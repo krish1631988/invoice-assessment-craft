@@ -8,7 +8,14 @@ class UserInfoComponent extends Component {
     render() {
         return (
             <div>
-                <p>UserInfoComponent to store users email and name.</p>
+                <div>
+                    {`Name:    `}
+                    <input type='text' name='userName' />
+                </div>
+                <div>
+                    {`Email:    `}
+                    <input type='text' name='userEmail' />
+                </div>
             </div>
         );
     }

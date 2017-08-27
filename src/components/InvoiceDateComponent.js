@@ -8,7 +8,8 @@ class InvoiceDateComponent extends Component {
     render() {
         return (
             <div>
-                <p>InvoiceDateComponent to handle transaction date.</p>
+                {`Due Date:    `}
+                <input type='date' name='invoiceDate' />
             </div>
         );
     }
