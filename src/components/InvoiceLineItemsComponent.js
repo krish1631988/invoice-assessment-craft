@@ -17,10 +17,37 @@ class InvoiceLineItemsComponent extends Component {
         };
 
         this.handleLineItemAddition = this.handleLineItemAddition.bind(this);
+        this.handleDescriptionTextChange = this.handleDescriptionTextChange.bind(this);
+        this.handleAmountChange = this.handleAmountChange.bind(this);
+    }
+
+    handleDescriptionTextChange(event) {
+        let currentLineItems = this.state.lineItems;
+        currentLineItems.forEach(function(lineItem) {
+            if (parseInt(event.target.id) === lineItem.id) {
+                lineItem.invoiceDescription = event.target.value;
+            }
+        });
+        this.setState({
+            lineItems: currentLineItems
+        });
+    }
+
+    handleAmountChange(event) {
+        let currentLineItems = this.state.lineItems;
+        currentLineItems.forEach(function(lineItem) {
+            if (parseInt(event.target.id) === lineItem.id) {
+                lineItem.invoiceAmount = event.target.value;
+            }
+        });
+        this.setState({
+            lineItems: currentLineItems
+        });
     }
 
     createLineItems(lineItems) {
         let lLineItems;
+        const self = this;
         lLineItems = lineItems.map(function(lineItem) {
             return (
                 <div key={lineItem.id}>
@@ -28,6 +55,8 @@ class InvoiceLineItemsComponent extends Component {
                         id={lineItem.id}
                         invoiceDescription={lineItem.invoiceDescription}
                         invoiceAmount={lineItem.invoiceAmount}
+                        onDescriptionTextChange={self.handleDescriptionTextChange}
+                        onAmountChange={self.handleAmountChange}
                     />
                 </div>
             );
@@ -40,8 +69,8 @@ class InvoiceLineItemsComponent extends Component {
         this.nextLineItemID++;
         const newLineItem = {
             id: this.nextLineItemID,
-            invoiceDescription: 'Test Description 3',
-            invoiceAmount: '300'
+            invoiceDescription: 'Default description',
+            invoiceAmount: '100'
         };
         currentLineItems.push(newLineItem);
         this.setState({
