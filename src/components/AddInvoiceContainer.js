@@ -28,8 +28,8 @@ class AddInvoiceContainer extends Component {
         this.nextLineItemID = 0;
         this.state = {
             userInfo: {
-                userName: '',
-                userEmail: ''
+                userName: 'Intuit User',
+                userEmail: 'intuit_user@intuit.com'
             },
             dueDate: '',
             lineItems: [
@@ -44,6 +44,8 @@ class AddInvoiceContainer extends Component {
         this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
         this.handleLineItemAmountChange = this.handleLineItemAmountChange.bind(this);
         this.handleNewLineItemAddition = this.handleNewLineItemAddition.bind(this);
+        this.handleUserNameChange = this.handleUserNameChange.bind(this);
+        this.handleUserEmailChange = this.handleUserEmailChange.bind(this);
     }
 
     /**
@@ -107,9 +109,53 @@ class AddInvoiceContainer extends Component {
     }
 
     /**
+     * Handler method to handle updates to user name emitted by user name field
+     * under UserInfoComponent.
+     * @param event Event object.
+     */
+    handleUserNameChange(event) {
+        let currentUserInfo = this.state.userInfo;
+        currentUserInfo.userName = event.target.value;
+        this.setState({
+            userInfo: currentUserInfo
+        });
+    }
+
+    /**
+     * Handler method to handle updates to user email emitted by user email field
+     * under UserInfoComponent.
+     * @param event Event object.
+     */
+    handleUserEmailChange(event) {
+        let currentUserInfo = this.state.userInfo;
+        currentUserInfo.userEmail = event.target.value;
+        this.setState({
+            userInfo: currentUserInfo
+        });
+    }
+
+    /**
+     * Sub-render method to render UserInfoComponent
+     * @see handleUserNameChange()
+     * @see handleUserEmailChange()
+     */
+    renderUserInfoComponent() {
+        return (
+            <UserInfoComponent
+                userInfo={this.state.userInfo}
+                onUserNameChange={this.handleUserNameChange}
+                onUserEmailChange={this.handleUserEmailChange}
+            />
+        );
+    }
+
+    /**
      * Sub-render method to render InvoiceLineItemsComponent.
      * Note that we have handlers for all specific actions related to component
      * and LineItemComponent too.
+     * @see handleLineItemDescriptionChange()
+     * @see handleLineItemAmountChange()
+     * @see handleNewLineItemAddition()
      */
     renderInvoiceLineItems() {
         return (
@@ -130,7 +176,7 @@ class AddInvoiceContainer extends Component {
         return (
             <div className='invoice-container'>
                 <p>AddInvoiceContainer component at uber level.</p>
-                <UserInfoComponent />
+                {this.renderUserInfoComponent()}
                 <InvoiceDateComponent />
                 {this.renderInvoiceLineItems()}
                 <input type='button' value='Send Invoice' name='sendInvoice' />
