@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import '../style/InvoiceDateComponent.css';
+
 /**
  * InvoiceDateComponent to be responsible for handling and adding dates to invoice.
  */
@@ -25,6 +27,7 @@ class InvoiceDateComponent extends Component {
     renderDueDateField() {
         return (
             <input
+                className='due-date'
                 type='date'
                 name='invoiceDate'
                 value={this.props.dueDate}

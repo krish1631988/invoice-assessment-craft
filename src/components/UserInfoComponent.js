@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import '../style/UserInfoComponent.css';
+
 /**
  * UserInfoComponent would be responsible to present user information fields.
  */
@@ -35,6 +37,7 @@ class UserInfoComponent extends Component {
     renderUserNameField() {
         return (
             <input
+                className='user-name'
                 type='text'
                 name='userName'
                 defaultValue={this.props.userInfo.userName}
@@ -50,6 +53,7 @@ class UserInfoComponent extends Component {
     renderUserEmailField() {
         return (
             <input
+                className='user-email'
                 type='text'
                 name='userEmail'
                 defaultValue={this.props.userInfo.userEmail}

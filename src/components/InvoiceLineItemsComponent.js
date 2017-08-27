@@ -2,6 +2,8 @@ import React, {Component} from 'react';
 
 import LineItemComponent from './LineItemComponent';
 
+import '../style/InvoiceLineItemsComponent.css';
+
 /**
  * React component to hold Invoice line items. Component would be responsible
  * for adding LineItems and handling related updates. We would also display
@@ -80,7 +82,13 @@ class InvoiceLineItemsComponent extends Component {
         return (
             <div>
                 {this.createLineItems(this.props.lineItems)}
-                <button name='addLineItem' onClick={this.handleLineItemAddition}>{'+'}</button>
+                <button
+                    name='addLineItem'
+                    className='add-line-item-btn'
+                    onClick={this.handleLineItemAddition}
+                >
+                    {'+'}
+                </button>
             </div>
         );
     }

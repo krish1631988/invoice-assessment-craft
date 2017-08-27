@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import '../style/LineItemComponent.css';
+
 /**
  * LineItemComponent that would be responsible only to present a line item
  * in UI.
@@ -38,6 +40,7 @@ class LineItemComponent extends Component {
         return (
             <input
                 id={this.props.id}
+                className='description-field'
                 type='text'
                 name='desctiptionText'
                 defaultValue={this.props.invoiceDescription}
@@ -54,6 +57,7 @@ class LineItemComponent extends Component {
         return (
             <input
                 id={this.props.id}
+                className='amount-field'
                 type='text'
                 name='invoiceAmt'
                 defaultValue={this.props.invoiceAmount}
@@ -69,7 +73,7 @@ class LineItemComponent extends Component {
      */
     render() {
         return (
-            <div id={this.props.id}>
+            <div className='line-item'>
                 {`Description:    `}
                 {this.renderDescriptionField()}
                 {`Amount:    `}

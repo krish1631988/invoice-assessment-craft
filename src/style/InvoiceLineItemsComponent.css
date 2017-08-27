@@ -1,0 +1,18 @@
+.add-line-item-btn {
+    display: inline-block;
+    box-sizing: border-box;
+    position: relative;
+    height: 34px;
+    width: 40px;
+    border-radius: 2px;
+    border: 1px solid #babec5;
+    padding: 0 6px 0 0;
+    margin-top: 20px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    font-family: sans-serif;
+    align-self: auto;
+    color: blue;
+    align-content: center;
+}
