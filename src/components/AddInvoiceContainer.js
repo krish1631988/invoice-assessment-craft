@@ -242,48 +242,6 @@ class AddInvoiceContainer extends Component {
     }
 
     /**
-     * Sub-render method to render confirmation block when invoice has been stored.
-     * @see handleReturningToAddInvoice()
-     */
-    renderInvoiceStorageConfirmation() {
-        return (
-            <div>
-                <h1>Invoice has been added to DB</h1>
-                <div>
-                    <button
-                        name='addNewInvoice'
-                        onClick={this.handleReturningToAddInvoice}
-                    >
-                        {'Add another Invoice'}
-                    </button>
-                </div>
-            </div>
-        );
-    }
-
-    /**
-     * Sub-render method to render invoice addition block.
-     * @see renderUserInfoComponent()
-     * @see renderInvoiceDateComponent()
-     * @see renderInvoiceLineItems()
-     */
-    renderInvoiceAdditionBlock() {
-        return (
-            <div className='invoice-container'>
-                {this.renderUserInfoComponent()}
-                {this.renderInvoiceDateComponent()}
-                {this.renderInvoiceLineItems()}
-                <button
-                    name='sendInvoice'
-                    onClick={this.handleSendingInvoice}
-                >
-                    {'Send Invoice'}
-                </button>
-            </div>
-        );
-    }
-
-    /**
      * Render method which would render UserInfoComponent, InvoiceDateComponent
      * and InvoiceLineItemsComponent.
      */
@@ -293,9 +251,29 @@ class AddInvoiceContainer extends Component {
             <div>
                 {
                     invoiceSent ?
-                    {this.renderInvoiceAdditionBlock()}
+                    <div className='invoice-container'>
+                        {this.renderUserInfoComponent()}
+                        {this.renderInvoiceDateComponent()}
+                        {this.renderInvoiceLineItems()}
+                        <button
+                            name='sendInvoice'
+                            onClick={this.handleSendingInvoice}
+                        >
+                            {'Send Invoice'}
+                        </button>
+                    </div>
                     :
-                    {this.renderInvoiceStorageConfirmation()}
+                    <div>
+                        <h1>Invoice has been added to DB</h1>
+                        <div>
+                            <button
+                                name='addNewInvoice'
+                                onClick={this.handleReturningToAddInvoice}
+                            >
+                                {'Add another Invoice'}
+                            </button>
+                        </div>
+                    </div>
                 }
             </div>
         );
