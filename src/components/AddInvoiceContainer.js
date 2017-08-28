@@ -42,7 +42,7 @@ class AddInvoiceContainer extends Component {
                     invoiceAmount: '0'
                 }
             ],
-            invoiceSent: true,
+            invoiceSent: false,
             showErrorMessage: false
         };
 
@@ -168,7 +168,6 @@ class AddInvoiceContainer extends Component {
                 lineItems: invoiceLineItems
             }
             localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
-            console.log('Invoice is being sent');
             this.setState({
                 showErrorMessage: false,
                 invoiceSent: !this.state.invoiceSent
@@ -264,7 +263,7 @@ class AddInvoiceContainer extends Component {
         return (
             <div>
                 {
-                    invoiceSent ?
+                    !invoiceSent ?
                     <div className='invoice-container'>
                         {this.renderUserInfoComponent()}
                         {this.renderInvoiceDateComponent()}
