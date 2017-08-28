@@ -7,6 +7,34 @@
     margin-top: 20px;
 }
 
+.total-block {
+    width: 600px;
+    margin-top: 100px;
+    border: 1px, solid;
+    display: block;
+}
+
+.total-span {
+    float: right;
+    font-weight: bold;
+}
+
+.error-block {
+    width: 600px;
+    margin-top: 125px;
+    border: 1px, solid;
+    display: block;
+}
+
+.input-error {
+    width: 600px;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    font-family: sans-serif;
+    color: red
+}
+
 .send-invoice-btn-div {
     width: 600px;
     margin-top: 150px;
@@ -29,18 +57,6 @@
     background-color: green;
     text-align: center;
     float: right;
-}
-
-.total-block {
-    width: 600px;
-    margin-top: 100px;
-    border: 1px, solid;
-    display: block;
-}
-
-.total-span {
-    float: right;
-    font-weight: bold;
 }
 
 .another-invoice-btn-div {
@@ -97,5 +113,13 @@
         float: right;
         font-weight: bold;
         margin-right: 6px;
+    }
+
+    .error-block {
+        width: 100%;
+    }
+
+    .input-error {
+        width: 100%;
     }
 }

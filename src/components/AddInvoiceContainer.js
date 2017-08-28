@@ -42,7 +42,8 @@ class AddInvoiceContainer extends Component {
                     invoiceAmount: '0'
                 }
             ],
-            invoiceSent: true
+            invoiceSent: true,
+            showErrorMessage: false
         };
 
         this.handleLineItemDescriptionChange = this.handleLineItemDescriptionChange.bind(this);
@@ -160,16 +161,23 @@ class AddInvoiceContainer extends Component {
         const invoiceDueDate = this.state.dueDate;
         const invoiceLineItems = this.state.lineItems;
         let invoiceToBeStored;
-        invoiceToBeStored = {
-            userInfo: invoiceUserInfo,
-            dueDate: invoiceDueDate,
-            lineItems: invoiceLineItems
+        if (base_utils.validateLineItemAmount(invoiceLineItems) && base_utils.validateUserNameField(invoiceUserInfo.userName) && base_utils.validateUserEmailField(invoiceUserInfo.userEmail)) {
+            invoiceToBeStored = {
+                userInfo: invoiceUserInfo,
+                dueDate: invoiceDueDate,
+                lineItems: invoiceLineItems
+            }
+            localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
+            console.log('Invoice is being sent');
+            this.setState({
+                showErrorMessage: false,
+                invoiceSent: !this.state.invoiceSent
+            });
+        } else {
+            this.setState({
+                showErrorMessage: true
+            });
         }
-        localStorage.setItem(invoiceID, JSON.stringify(invoiceToBeStored));
-        console.log('Invoice is being sent');
-        this.setState({
-            invoiceSent: !this.state.invoiceSent
-        });
     }
 
     /**
@@ -186,7 +194,7 @@ class AddInvoiceContainer extends Component {
             lineItems: [
                 {
                     id: this.nextLineItemID,
-                    invoiceDescription: '',
+                    invoiceDescription: 'Default description',
                     invoiceAmount: '0'
                 }
             ],
@@ -247,6 +255,7 @@ class AddInvoiceContainer extends Component {
      */
     render() {
         const invoiceSent = this.state.invoiceSent;
+        const showErrorMessage = this.state.showErrorMessage;
         let lineItemsTotalAmt = 0;
         const lineItems = this.state.lineItems;
         lineItems.forEach(function(lineItem) {
@@ -263,6 +272,12 @@ class AddInvoiceContainer extends Component {
                         <div className='total-block'>
                             <span className='total-span'>{`TOTAL     $`}{lineItemsTotalAmt}</span>
                         </div>
+                        {
+                            showErrorMessage &&
+                            <div className='error-block'>
+                                <span className='input-error'>{`Please make sure to provide valid User Name , User Email. Make sure to have amount entered for every line item.`}</span>
+                            </div>
+                        }
                         <div className='send-invoice-btn-div'>
                             <button
                                 className='send-invoice-btn'
